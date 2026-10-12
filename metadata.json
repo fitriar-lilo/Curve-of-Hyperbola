@@ -1,0 +1,6 @@
+{
+  "name": "IGCSE Curved Graphs: Hyperbolas & Quadratics Mastery",
+  "description": "Interactive Cambridge IGCSE 0580 Mathematics lesson and mastery tool for sketching hyperbolas y = a/x + b with a quadratic warm-up review.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
