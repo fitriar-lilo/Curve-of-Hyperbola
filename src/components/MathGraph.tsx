@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { GraphConfig } from '../types';
+import { MathView } from './MathView';
 
 interface MathGraphProps {
   config: GraphConfig;
@@ -198,8 +199,12 @@ export const MathGraph: React.FC<MathGraphProps> = ({
         <div className="bg-slate-900/90 px-3 py-1.5 text-xs font-semibold text-slate-300 border-b border-slate-800 flex items-center justify-between">
           <span>{title}</span>
           {config.type === 'hyperbola' && (
-            <span className="text-[11px] font-mono text-indigo-400">
-              y = {config.a ?? 1}/x {((config.b ?? 0) >= 0 ? `+ ${config.b ?? 0}` : `- ${Math.abs(config.b ?? 0)}`)}
+            <span className="text-[11px] text-indigo-300 font-semibold">
+              <MathView
+                latex={`y = ${(config.a ?? 1) >= 0 ? `\\frac{${config.a ?? 1}}{x}` : `-\\frac{${Math.abs(config.a ?? 1)}}{x}`}${
+                  (config.b ?? 0) > 0 ? ` + ${config.b}` : (config.b ?? 0) < 0 ? ` - ${Math.abs(config.b ?? 0)}` : ''
+                }`}
+              />
             </span>
           )}
         </div>

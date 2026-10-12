@@ -1,7 +1,23 @@
 import React, { useState } from 'react';
 import { MathGraph } from './MathGraph';
+import { MathView } from './MathView';
 import { Sliders, Sparkles, CheckCircle2, Info, Compass, ArrowRight } from 'lucide-react';
 import { playClickSound } from '../utils/audio';
+
+export function getHyperbolaLatex(paramA: number, paramB: number): string {
+  let eq = 'y = ';
+  if (paramA >= 0) {
+    eq += `\\frac{${paramA}}{x}`;
+  } else {
+    eq += `-\\frac{${Math.abs(paramA)}}{x}`;
+  }
+  if (paramB > 0) {
+    eq += ` + ${paramB}`;
+  } else if (paramB < 0) {
+    eq += ` - ${Math.abs(paramB)}`;
+  }
+  return eq;
+}
 
 export const HyperbolaVisualizer: React.FC = () => {
   const [a, setA] = useState<number>(4);
@@ -102,25 +118,20 @@ export const HyperbolaVisualizer: React.FC = () => {
               <div className="text-xs font-semibold tracking-wider uppercase text-indigo-400 mb-1">
                 Current Equation
               </div>
-              <div className="text-3xl font-extrabold text-white tracking-wide font-mono flex items-center gap-2">
-                <span>y = </span>
-                <span className={a >= 0 ? 'text-indigo-400' : 'text-rose-400'}>
-                  {a >= 0 ? a : `- ${Math.abs(a)}`}
-                </span>
-                <span>/ x</span>
-                {b !== 0 && (
-                  <span className={b > 0 ? 'text-sky-400' : 'text-amber-400'}>
-                    {b > 0 ? ` + ${b}` : ` - ${Math.abs(b)}`}
-                  </span>
-                )}
+              <div className="text-3xl sm:text-4xl font-extrabold text-white py-1">
+                <MathView latex={getHyperbolaLatex(a, b)} />
               </div>
               <div className="mt-3 flex items-center gap-2 text-xs text-slate-300">
                 <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
                 <span>Horizontal Asymptote: </span>
-                <strong className="text-sky-400 font-mono">y = {b}</strong>
+                <strong className="text-sky-400 font-semibold">
+                  <MathView latex={`y = ${b}`} />
+                </strong>
                 <span className="mx-1">•</span>
                 <span>Vertical Asymptote: </span>
-                <strong className="text-amber-400 font-mono">x = 0</strong>
+                <strong className="text-amber-400 font-semibold">
+                  <MathView latex="x = 0" />
+                </strong>
               </div>
             </div>
 
@@ -205,21 +216,21 @@ export const HyperbolaVisualizer: React.FC = () => {
               <div className="text-xs font-semibold text-slate-400 mb-2.5">Quick Presets:</div>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { label: 'y = 4/x + 2', aVal: 4, bVal: 2 },
-                  { label: 'y = -6/x - 3', aVal: -6, bVal: -3 },
-                  { label: 'y = 2/x', aVal: 2, bVal: 0 },
-                  { label: 'y = -3/x + 1', aVal: -3, bVal: 1 },
-                ].map((item) => (
+                  { latex: 'y = \\frac{4}{x} + 2', aVal: 4, bVal: 2 },
+                  { latex: 'y = -\\frac{6}{x} - 3', aVal: -6, bVal: -3 },
+                  { latex: 'y = \\frac{2}{x}', aVal: 2, bVal: 0 },
+                  { latex: 'y = -\\frac{3}{x} + 1', aVal: -3, bVal: 1 },
+                ].map((item, idx) => (
                   <button
-                    key={item.label}
+                    key={`preset-${idx}`}
                     onClick={() => {
                       setA(item.aVal);
                       setB(item.bVal);
                       playClickSound();
                     }}
-                    className="text-xs font-mono py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-indigo-600/30 hover:border-indigo-400 border border-slate-700 text-slate-200 transition-colors"
+                    className="text-xs py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-indigo-600/30 hover:border-indigo-400 border border-slate-700 text-slate-200 transition-colors"
                   >
-                    {item.label}
+                    <MathView latex={item.latex} />
                   </button>
                 ))}
               </div>
@@ -229,15 +240,15 @@ export const HyperbolaVisualizer: React.FC = () => {
             <div className="p-4 rounded-2xl bg-indigo-950/30 border border-indigo-900/40 text-xs text-slate-300 space-y-2">
               <div className="flex items-start gap-2">
                 <Info className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
-                <span>
-                  <strong>Why is x = 0 forbidden?</strong> Dividing any number by 0 has no answer. This creates an eternal gap! The graph splits into two separate curves (branches).
-                </span>
+                <div>
+                  <MathView>Why is $x = 0$ forbidden? Dividing any number by 0 has no answer. This creates an eternal gap! The graph splits into two separate curves (branches).</MathView>
+                </div>
               </div>
               <div className="flex items-start gap-2">
                 <Info className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
-                <span>
-                  <strong>Why does y approach b?</strong> When x becomes huge (like 100 or -100), {Math.abs(a)}/x shrinks to nearly 0. So y gets closer and closer to {b}.
-                </span>
+                <div>
+                  <MathView>{`Why does $y$ approach $b$? When $x$ becomes huge, $\\frac{${Math.abs(a)}}{x} \\to 0$. So $y$ gets closer and closer to $y = ${b}$.`}</MathView>
+                </div>
               </div>
             </div>
           </div>
@@ -296,11 +307,15 @@ export const HyperbolaVisualizer: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-4 h-0.5 border-t-2 border-dashed border-sky-400"></span>
-                  <span className="text-sky-300 font-mono">y = {b} (Horizontal Asymptote)</span>
+                  <span className="text-sky-300 font-medium">
+                    <MathView latex={`y = ${b}`} /> (Horizontal Asymptote)
+                  </span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-4 h-0.5 border-t-2 border-dashed border-amber-400"></span>
-                  <span className="text-amber-300 font-mono">x = 0 (Vertical Asymptote)</span>
+                  <span className="text-amber-300 font-medium">
+                    <MathView latex="x = 0" /> (Vertical Asymptote)
+                  </span>
                 </div>
               </div>
             </div>
@@ -311,8 +326,8 @@ export const HyperbolaVisualizer: React.FC = () => {
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300">
                   Step-by-Step Table of Coordinates
                 </h4>
-                <span className="text-[11px] text-slate-400">
-                  Calculated using {formatEquation(a, b)}
+                <span className="text-[11px] text-slate-300">
+                  <MathView latex={getHyperbolaLatex(a, b)} />
                 </span>
               </div>
 
@@ -320,7 +335,9 @@ export const HyperbolaVisualizer: React.FC = () => {
                 <table className="w-full text-center text-xs border-collapse">
                   <thead>
                     <tr className="bg-slate-800/80 text-slate-300">
-                      <th className="py-2 px-2 rounded-l-lg font-mono">x</th>
+                      <th className="py-2 px-2 rounded-l-lg font-mono">
+                        <MathView latex="x" />
+                      </th>
                       {divisorsOfA.map((x) => (
                         <th key={`head-${x}`} className="py-2 px-1 font-mono text-slate-300">
                           {x}
@@ -332,7 +349,7 @@ export const HyperbolaVisualizer: React.FC = () => {
                   <tbody>
                     <tr className="border-t border-slate-800">
                       <td className="py-2 px-2 font-mono font-bold text-indigo-400 bg-slate-800/40">
-                        a / x
+                        <MathView latex="a / x" />
                       </td>
                       {divisorsOfA.map((x) => (
                         <td key={`ax-${x}`} className="py-2 px-1 font-mono text-slate-300">
@@ -345,7 +362,7 @@ export const HyperbolaVisualizer: React.FC = () => {
                     </tr>
                     <tr className="border-t border-slate-800">
                       <td className="py-2 px-2 font-mono font-bold text-sky-400 bg-slate-800/40">
-                        y (a/x + b)
+                        <MathView latex="y = \frac{a}{x} + b" />
                       </td>
                       {divisorsOfA.map((x) => {
                         const yVal = a / x + b;
@@ -385,33 +402,33 @@ export const HyperbolaVisualizer: React.FC = () => {
                   <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/50 px-2 py-0.5 rounded">
                     Example 1
                   </span>
-                  <span className="text-xs font-mono text-slate-400">Positive a, Shifted Up</span>
+                  <span className="text-xs text-slate-400 font-medium">Positive a, Shifted Up</span>
                 </div>
-                <h4 className="text-xl font-bold font-mono text-white mb-2">
-                  y = 4/x + 2
-                </h4>
-                <ul className="text-xs text-slate-300 space-y-2 mb-4">
+                <div className="text-2xl font-bold text-white mb-3">
+                  <MathView latex="y = \frac{4}{x} + 2" />
+                </div>
+                <ul className="text-xs text-slate-300 space-y-2.5 mb-4">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                    <span><strong>a = 4 (positive):</strong> branches lie in <strong>Quadrants 1 & 3</strong>.</span>
+                    <div><MathView latex="a = 4" /> (positive): branches lie in <strong>Quadrants 1 & 3</strong>.</div>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                    <span><strong>b = 2 (shifted up 2):</strong> horizontal asymptote is <strong className="text-sky-400 font-mono">y = 2</strong>.</span>
+                    <div><MathView latex="b = 2" /> (shifted up 2): horizontal asymptote is <span className="text-sky-400 font-bold"><MathView latex="y = 2" /></span>.</div>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>Vertical asymptote is always <strong className="text-amber-400 font-mono">x = 0</strong>.</span>
+                    <div>Vertical asymptote is always <span className="text-amber-400 font-bold"><MathView latex="x = 0" /></span>.</div>
                   </li>
                 </ul>
 
-                <div className="bg-slate-950/70 p-2 rounded-xl border border-slate-800/80 mb-3 text-[11px] font-mono text-slate-300">
-                  <div className="text-[10px] uppercase text-slate-400 font-bold mb-1">Key Coordinates:</div>
-                  <div className="grid grid-cols-2 gap-1 text-slate-300">
-                    <div>x = 1 → y = 6</div>
-                    <div>x = 2 → y = 4</div>
-                    <div>x = -1 → y = -2</div>
-                    <div>x = -2 → y = 0</div>
+                <div className="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800/80 mb-3 text-[11px] text-slate-300">
+                  <div className="text-[10px] uppercase text-slate-400 font-bold mb-1.5">Key Coordinates:</div>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    <div><MathView>$x = 1 \implies y = 6$</MathView></div>
+                    <div><MathView>$x = 2 \implies y = 4$</MathView></div>
+                    <div><MathView>$x = -1 \implies y = -2$</MathView></div>
+                    <div><MathView>$x = -2 \implies y = 0$</MathView></div>
                   </div>
                 </div>
               </div>
@@ -440,33 +457,33 @@ export const HyperbolaVisualizer: React.FC = () => {
                   <span className="text-xs font-bold uppercase tracking-wider text-rose-400 bg-rose-950/50 px-2 py-0.5 rounded">
                     Example 2
                   </span>
-                  <span className="text-xs font-mono text-slate-400">Negative a, Shifted Down</span>
+                  <span className="text-xs text-slate-400 font-medium">Negative a, Shifted Down</span>
                 </div>
-                <h4 className="text-xl font-bold font-mono text-white mb-2">
-                  y = -6/x - 3
-                </h4>
-                <ul className="text-xs text-slate-300 space-y-2 mb-4">
+                <div className="text-2xl font-bold text-white mb-3">
+                  <MathView latex="y = -\frac{6}{x} - 3" />
+                </div>
+                <ul className="text-xs text-slate-300 space-y-2.5 mb-4">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-rose-400 shrink-0 mt-0.5" />
-                    <span><strong>a = -6 (negative):</strong> branches lie in <strong>Quadrants 2 & 4</strong>.</span>
+                    <div><MathView latex="a = -6" /> (negative): branches lie in <strong>Quadrants 2 & 4</strong>.</div>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-rose-400 shrink-0 mt-0.5" />
-                    <span><strong>b = -3 (shifted down 3):</strong> horizontal asymptote is <strong className="text-sky-400 font-mono">y = -3</strong>.</span>
+                    <div><MathView latex="b = -3" /> (shifted down 3): horizontal asymptote is <span className="text-sky-400 font-bold"><MathView latex="y = -3" /></span>.</div>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-rose-400 shrink-0 mt-0.5" />
-                    <span>Vertical asymptote is <strong className="text-amber-400 font-mono">x = 0</strong>.</span>
+                    <div>Vertical asymptote is <span className="text-amber-400 font-bold"><MathView latex="x = 0" /></span>.</div>
                   </li>
                 </ul>
 
-                <div className="bg-slate-950/70 p-2 rounded-xl border border-slate-800/80 mb-3 text-[11px] font-mono text-slate-300">
-                  <div className="text-[10px] uppercase text-slate-400 font-bold mb-1">Key Coordinates:</div>
-                  <div className="grid grid-cols-2 gap-1 text-slate-300">
-                    <div>x = 2 → y = -6</div>
-                    <div>x = 3 → y = -5</div>
-                    <div>x = -2 → y = 0</div>
-                    <div>x = -3 → y = -1</div>
+                <div className="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800/80 mb-3 text-[11px] text-slate-300">
+                  <div className="text-[10px] uppercase text-slate-400 font-bold mb-1.5">Key Coordinates:</div>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    <div><MathView>$x = 2 \implies y = -6$</MathView></div>
+                    <div><MathView>$x = 3 \implies y = -5$</MathView></div>
+                    <div><MathView>$x = -2 \implies y = 0$</MathView></div>
+                    <div><MathView>$x = -3 \implies y = -1$</MathView></div>
                   </div>
                 </div>
               </div>
@@ -495,33 +512,33 @@ export const HyperbolaVisualizer: React.FC = () => {
                   <span className="text-xs font-bold uppercase tracking-wider text-sky-400 bg-sky-950/50 px-2 py-0.5 rounded">
                     Example 3
                   </span>
-                  <span className="text-xs font-mono text-slate-400">Positive a, No Shift</span>
+                  <span className="text-xs text-slate-400 font-medium">Positive a, No Shift</span>
                 </div>
-                <h4 className="text-xl font-bold font-mono text-white mb-2">
-                  y = 2/x
-                </h4>
-                <ul className="text-xs text-slate-300 space-y-2 mb-4">
+                <div className="text-2xl font-bold text-white mb-3">
+                  <MathView latex="y = \frac{2}{x}" />
+                </div>
+                <ul className="text-xs text-slate-300 space-y-2.5 mb-4">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-sky-400 shrink-0 mt-0.5" />
-                    <span><strong>a = 2 (positive):</strong> branches lie in <strong>Quadrants 1 & 3</strong>.</span>
+                    <div><MathView latex="a = 2" /> (positive): branches lie in <strong>Quadrants 1 & 3</strong>.</div>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-sky-400 shrink-0 mt-0.5" />
-                    <span><strong>b = 0 (no shift):</strong> horizontal asymptote is the x-axis: <strong className="text-sky-400 font-mono">y = 0</strong>.</span>
+                    <div><MathView latex="b = 0" /> (no shift): horizontal asymptote is the x-axis (<span className="text-sky-400 font-bold"><MathView latex="y = 0" /></span>).</div>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-sky-400 shrink-0 mt-0.5" />
-                    <span>Vertical asymptote is the y-axis: <strong className="text-amber-400 font-mono">x = 0</strong>.</span>
+                    <div>Vertical asymptote is the y-axis (<span className="text-amber-400 font-bold"><MathView latex="x = 0" /></span>).</div>
                   </li>
                 </ul>
 
-                <div className="bg-slate-950/70 p-2 rounded-xl border border-slate-800/80 mb-3 text-[11px] font-mono text-slate-300">
-                  <div className="text-[10px] uppercase text-slate-400 font-bold mb-1">Key Coordinates:</div>
-                  <div className="grid grid-cols-2 gap-1 text-slate-300">
-                    <div>x = 1 → y = 2</div>
-                    <div>x = 2 → y = 1</div>
-                    <div>x = -1 → y = -2</div>
-                    <div>x = -2 → y = -1</div>
+                <div className="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800/80 mb-3 text-[11px] text-slate-300">
+                  <div className="text-[10px] uppercase text-slate-400 font-bold mb-1.5">Key Coordinates:</div>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    <div><MathView>$x = 1 \implies y = 2$</MathView></div>
+                    <div><MathView>$x = 2 \implies y = 1$</MathView></div>
+                    <div><MathView>$x = -1 \implies y = -2$</MathView></div>
+                    <div><MathView>$x = -2 \implies y = -1$</MathView></div>
                   </div>
                 </div>
               </div>
@@ -559,43 +576,43 @@ export const HyperbolaVisualizer: React.FC = () => {
               <span className="text-xs uppercase font-bold text-indigo-400 tracking-wider">
                 1. General Form
               </span>
-              <p className="text-xl font-mono text-white font-bold">
-                y = a/x + b
-              </p>
-              <p className="text-xs text-slate-300">
-                A hyperbola has <strong>two separate smooth curved branches</strong>. It is never one continuous line because <span className="font-mono text-amber-300">x = 0</span> is undefined.
+              <div className="text-2xl text-white font-bold my-1">
+                <MathView latex="y = \frac{a}{x} + b" />
+              </div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                A hyperbola consists of <strong>two separate smooth curved branches</strong>. It is never one continuous line because <MathView>$x = 0$</MathView> is undefined.
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-2">
               <span className="text-xs uppercase font-bold text-sky-400 tracking-wider">
-                2. Asymptotes (Guidelines)
+                2. Asymptotes (Boundary Lines)
               </span>
-              <p className="text-slate-200 text-xs leading-relaxed">
-                • <strong>Vertical Asymptote:</strong> Always <span className="font-mono text-amber-300 font-bold">x = 0</span> (the y-axis).<br />
-                • <strong>Horizontal Asymptote:</strong> Always <span className="font-mono text-sky-300 font-bold">y = b</span>. The curve gets infinitely close to this line as x grows large, but never touches it.
-              </p>
+              <div className="text-slate-200 text-xs leading-relaxed space-y-1">
+                <div>• <strong>Vertical Asymptote:</strong> Always <MathView>$x = 0$</MathView> (the y-axis).</div>
+                <div>• <strong>Horizontal Asymptote:</strong> Always <MathView>$y = b$</MathView>. The curve gets infinitely close as <MathView>$x \to \pm\infty$</MathView>, but never touches it.</div>
+              </div>
             </div>
 
             <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-2">
               <span className="text-xs uppercase font-bold text-emerald-400 tracking-wider">
-                3. Sign of a (Which Quadrants?)
+                3. Sign of a (Quadrant Placement)
               </span>
-              <p className="text-slate-200 text-xs leading-relaxed">
-                • <strong>If a &gt; 0:</strong> Curve is in <strong>Quadrants 1 & 3</strong> (top-right and bottom-left).<br />
-                • <strong>If a &lt; 0:</strong> Curve is in <strong>Quadrants 2 & 4</strong> (top-left and bottom-right).
-              </p>
+              <div className="text-slate-200 text-xs leading-relaxed space-y-1">
+                <div>• <strong>If <MathView>$a &gt; 0$</MathView>:</strong> Curve is in <strong>Quadrants 1 & 3</strong> (top-right and bottom-left).</div>
+                <div>• <strong>If <MathView>$a &lt; 0$</MathView>:</strong> Curve is in <strong>Quadrants 2 & 4</strong> (top-left and bottom-right).</div>
+              </div>
             </div>
 
             <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-2">
               <span className="text-xs uppercase font-bold text-violet-400 tracking-wider">
                 4. Exam Sketching Checklist
               </span>
-              <p className="text-slate-200 text-xs leading-relaxed">
-                1. Draw and label the horizontal dashed line <span className="font-mono text-sky-300">y = b</span>.<br />
-                2. Check the sign of <span className="font-mono text-indigo-300">a</span> to place the branches in the correct opposite quadrants.<br />
-                3. Calculate 1 or 2 easy integer test points (e.g. at x = 1 and x = -1).
-              </p>
+              <div className="text-slate-200 text-xs leading-relaxed space-y-1">
+                <div>1. Draw and label the dashed horizontal line <MathView>$y = b$</MathView>.</div>
+                <div>2. Check the sign of <MathView>$a$</MathView> to place the branches in opposite quadrants.</div>
+                <div>3. Calculate 1 or 2 integer test points (e.g. at <MathView>$x = 1$</MathView> and <MathView>$x = -1$</MathView>).</div>
+              </div>
             </div>
           </div>
         </div>

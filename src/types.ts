@@ -18,7 +18,9 @@ export interface GraphConfig {
 export interface QuestionOption {
   id: string;
   label: string;
+  latex?: string;
   subLabel?: string;
+  subLabelLatex?: string;
   graphConfig?: GraphConfig;
   isCorrect: boolean;
 }
@@ -29,8 +31,10 @@ export interface Question {
   number: number;
   title: string;
   prompt: string;
+  promptLatex?: string;
   graphConfig?: GraphConfig;
   equationDisplay?: string;
+  equationLatex?: string;
   options: QuestionOption[];
   hints: string[];
   explanation: string;

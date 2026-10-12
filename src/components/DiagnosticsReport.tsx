@@ -3,6 +3,7 @@ import { Question, UserAnswerState } from '../types';
 import { Award, Printer, CheckCircle2, AlertTriangle, BookOpen, Sparkles, MessageSquareQuote, Download, Save, FileText, Check } from 'lucide-react';
 import { playClickSound, playCorrectSound } from '../utils/audio';
 import { downloadPdfReport, downloadHtmlReport } from '../utils/reportExporter';
+import { MathView } from './MathView';
 
 interface DiagnosticsReportProps {
   studentName: string;
@@ -70,21 +71,21 @@ export const DiagnosticsReport: React.FC<DiagnosticsReportProps> = ({
     (q) => q.section === 'quadratic' && (!answers[q.id]?.isCorrect || (answers[q.id]?.attempts || 0) >= 2)
   );
   if (struggledQuad) {
-    recommendations.push('Review Quadratic Curves: remember U-shape is +x² (minimum) and n-shape is -x² (maximum). The constant c gives the y-intercept.');
+    recommendations.push('Review Quadratic Curves: remember U-shape is $+x^2$ (minimum) and n-shape is $-x^2$ (maximum). The constant $c$ gives the y-intercept.');
   }
 
   const struggledAsymptotes = ['hyp-12', 'hyp-13'].some(
     (id) => !answers[id]?.isCorrect || (answers[id]?.attempts || 0) >= 2
   );
   if (struggledAsymptotes) {
-    recommendations.push('Review Horizontal Asymptotes: in y = a/x + b, as x becomes huge, a/x becomes 0. Therefore, the horizontal asymptote line is always y = b.');
+    recommendations.push('Review Horizontal Asymptotes: in $y = \\frac{a}{x} + b$, as $x \\to \\infty$, $\\frac{a}{x} \\to 0$. Therefore, the horizontal asymptote line is always $y = b$.');
   }
 
   const struggledQuadrants = ['hyp-14', 'hyp-15', 'hyp-7', 'hyp-10'].some(
     (id) => !answers[id]?.isCorrect || (answers[id]?.attempts || 0) >= 2
   );
   if (struggledQuadrants) {
-    recommendations.push('Review Sign of "a": When a > 0, branches sit in Quadrants 1 & 3. When a < 0, branches sit in Quadrants 2 & 4 relative to asymptotes.');
+    recommendations.push('Review Sign of "$a$": When $a > 0$, branches sit in Quadrants 1 & 3. When $a < 0$, branches sit in Quadrants 2 & 4 relative to asymptotes.');
   }
 
   if (recommendations.length === 0) {
@@ -312,8 +313,10 @@ export const DiagnosticsReport: React.FC<DiagnosticsReportProps> = ({
           <ul className="space-y-1.5 text-xs text-slate-300">
             {recommendations.map((rec, i) => (
               <li key={`rec-${i}`} className="flex items-start gap-2">
-                <span className="text-indigo-400 font-bold shrink-0">•</span>
-                <span>{rec}</span>
+                <span className="text-indigo-400 font-bold shrink-0 mt-0.5">•</span>
+                <div>
+                  <MathView>{rec}</MathView>
+                </div>
               </li>
             ))}
           </ul>
@@ -369,7 +372,7 @@ export const DiagnosticsReport: React.FC<DiagnosticsReportProps> = ({
                         {q.number}
                       </td>
                       <td className="py-2 px-3 font-medium text-slate-200">
-                        {q.title}
+                        <MathView>{q.title}</MathView>
                       </td>
                       <td className="py-2 px-3 text-slate-400">
                         {concept}

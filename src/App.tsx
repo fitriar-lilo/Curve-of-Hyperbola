@@ -4,6 +4,7 @@ import { getQuestionsWithShuffledOptions } from './data/questions';
 import { QuestionCard } from './components/QuestionCard';
 import { HyperbolaVisualizer } from './components/HyperbolaVisualizer';
 import { DiagnosticsReport } from './components/DiagnosticsReport';
+import { MathView } from './components/MathView';
 import {
   Volume2,
   VolumeX,
@@ -312,12 +313,14 @@ export default function App() {
                 <span>Section 1 • Warm-up Review</span>
               </div>
               <h2 className="text-2xl font-extrabold text-white mb-2">
-                Parabolas: Reviewing Quadratic Graphs (y = ax² + bx + c)
+                <MathView>Parabolas: Reviewing Quadratic Graphs ($y = ax^2 + bx + c$)</MathView>
               </h2>
-              <p className="text-sm text-slate-300 max-w-3xl leading-relaxed">
-                Before tackling hyperbolas, let us review quadratic curves. Remember:
-                a positive <span className="font-mono text-indigo-300 font-bold">+x²</span> produces a <span className="text-emerald-300 font-semibold">U-shape (minimum)</span>, while a negative <span className="font-mono text-rose-300 font-bold">-x²</span> produces an <span className="text-rose-300 font-semibold">inverted n-shape (maximum)</span>. The constant <span className="font-mono text-amber-300 font-bold">c</span> is the y-intercept!
-              </p>
+              <div className="text-sm text-slate-300 max-w-3xl leading-relaxed">
+                <MathView>
+                  Before tackling hyperbolas, let us review quadratic curves. Remember:
+                  a positive $+x^2$ produces a U-shape (minimum), while a negative $-x^2$ produces an inverted n-shape (maximum). The constant $c$ is the y-intercept!
+                </MathView>
+              </div>
 
               <div className="mt-4 flex items-center justify-between pt-4 border-t border-indigo-900/40 text-xs">
                 <span className="text-slate-400">
@@ -392,12 +395,15 @@ export default function App() {
                 <Sliders className="w-4 h-4" />
                 <span>Section 2 • Concept & Visualizer</span>
               </div>
-              <h2 className="text-2xl font-extrabold text-white mb-2">
-                Understanding the Hyperbola: y = a/x + b
+              <h2 className="text-2xl font-extrabold text-white mb-2 flex flex-wrap items-center gap-2">
+                <span>Understanding the Hyperbola:</span>
+                <MathView latex="y = \frac{a}{x} + b" />
               </h2>
-              <p className="text-sm text-slate-300 max-w-3xl leading-relaxed">
-                A hyperbola has <strong>two separate curved branches</strong> that hug invisible boundary lines called <strong>asymptotes</strong>. Explore how changing the numerator <span className="font-mono text-indigo-300 font-bold">a</span> and the constant <span className="font-mono text-sky-300 font-bold">b</span> shapes and shifts the graph.
-              </p>
+              <div className="text-sm text-slate-300 max-w-3xl leading-relaxed">
+                <MathView>
+                  A hyperbola has two separate curved branches that hug invisible boundary lines called asymptotes. Explore how changing the numerator $a$ and the constant $b$ shapes and shifts the graph.
+                </MathView>
+              </div>
             </div>
 
             {/* Interactive Visualizer & Examples */}
@@ -446,9 +452,11 @@ export default function App() {
               <h2 className="text-2xl font-extrabold text-white mb-2">
                 Hyperbola Mastery Assessment (10 Questions)
               </h2>
-              <p className="text-sm text-slate-300 max-w-3xl leading-relaxed">
-                Test your skills across all 4 key Cambridge IGCSE competencies: matching graphs to equations, matching equations to graphs, identifying horizontal asymptotes (<span className="font-mono text-sky-300">y = b</span>), and determining quadrant placement from the sign of <span className="font-mono text-indigo-300">a</span>.
-              </p>
+              <div className="text-sm text-slate-300 max-w-3xl leading-relaxed">
+                <MathView>
+                  Test your skills across all 4 key Cambridge IGCSE competencies: matching graphs to equations, matching equations to graphs, identifying horizontal asymptotes ($y = b$), and determining quadrant placement from the sign of $a$.
+                </MathView>
+              </div>
 
               <div className="mt-4 flex items-center justify-between pt-4 border-t border-indigo-900/40 text-xs">
                 <span className="text-slate-400">

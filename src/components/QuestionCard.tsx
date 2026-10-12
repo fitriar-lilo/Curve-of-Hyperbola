@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Question, UserAnswerState } from '../types';
 import { MathGraph } from './MathGraph';
+import { MathView } from './MathView';
 import { Lightbulb, CheckCircle2, XCircle, Sparkles, HelpCircle, ArrowRight } from 'lucide-react';
 import { playCorrectSound, playIncorrectSound, playClickSound } from '../utils/audio';
 
@@ -87,13 +88,13 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
         <h3 className="text-base font-bold text-white leading-snug">
           {question.title}
         </h3>
-        <p className="text-sm text-slate-300 leading-relaxed">
-          {question.prompt}
-        </p>
+        <div className="text-sm text-slate-300 leading-relaxed">
+          <MathView>{question.prompt}</MathView>
+        </div>
 
-        {question.equationDisplay && !question.graphConfig && (
-          <div className="inline-block mt-1 py-1.5 px-3.5 rounded-xl bg-slate-950/80 border border-indigo-500/30 font-mono text-base font-bold text-indigo-300">
-            {question.equationDisplay}
+        {question.equationLatex && !question.graphConfig && (
+          <div className="inline-block mt-2 py-2 px-4 rounded-xl bg-slate-950/90 border border-indigo-500/40 text-indigo-300">
+            <MathView latex={question.equationLatex} />
           </div>
         )}
       </div>
@@ -157,16 +158,24 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
                 )}
               </div>
 
-              {/* Text Label */}
-              <div className="font-mono text-sm font-bold text-white mb-1">
-                {option.label}
+              {/* LaTeX Option Label */}
+              <div className="text-sm font-bold text-white mb-1">
+                {option.latex ? (
+                  <MathView latex={option.latex} />
+                ) : (
+                  <span className="font-mono">{option.label}</span>
+                )}
               </div>
 
-              {option.subLabel && (
+              {option.subLabelLatex ? (
                 <div className="text-xs text-slate-400 mb-2">
-                  {option.subLabel}
+                  <MathView latex={option.subLabelLatex} />
                 </div>
-              )}
+              ) : option.subLabel ? (
+                <div className="text-xs text-slate-400 mb-2">
+                  <MathView>{option.subLabel}</MathView>
+                </div>
+              ) : null}
 
               {/* Graph inside option card (for Q4, Q5, Q9, Q10, Q11) */}
               {option.graphConfig && (
@@ -194,9 +203,9 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
             <Sparkles className="w-4 h-4 text-emerald-400" />
             <span>Well Done!</span>
           </div>
-          <p className="text-xs text-emerald-100/90 leading-relaxed">
-            {question.explanation}
-          </p>
+          <div className="text-xs text-emerald-100/90 leading-relaxed">
+            <MathView>{question.explanation}</MathView>
+          </div>
         </div>
       )}
 
@@ -250,7 +259,9 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
                 <span className="w-4 h-4 rounded-full bg-amber-500/30 text-amber-300 text-[10px] flex items-center justify-center shrink-0 font-bold mt-0.5">
                   {idx + 1}
                 </span>
-                <span>{hint}</span>
+                <div className="flex-1">
+                  <MathView>{hint}</MathView>
+                </div>
               </div>
             ))}
           </div>
@@ -259,3 +270,4 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
     </div>
   );
 };
+

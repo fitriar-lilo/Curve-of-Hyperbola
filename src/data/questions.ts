@@ -1,4 +1,4 @@
-import { Question, QuestionOption } from '../types';
+import { Question } from '../types';
 
 export const INITIAL_QUESTIONS: Question[] = [
   // ==========================================
@@ -10,7 +10,8 @@ export const INITIAL_QUESTIONS: Question[] = [
     number: 1,
     title: 'Warm-up 1: Identify Parabola Equation',
     prompt: 'Look at the parabola graph below. What is its equation?',
-    equationDisplay: 'Find the quadratic equation',
+    equationDisplay: 'y = x² - 4',
+    equationLatex: 'y = x^2 - 4',
     graphConfig: {
       type: 'quadratic',
       quadA: 1,
@@ -25,17 +26,17 @@ export const INITIAL_QUESTIONS: Question[] = [
       ],
     },
     options: [
-      { id: 'q1-opt-a', label: 'y = x² - 4', isCorrect: true },
-      { id: 'q1-opt-b', label: 'y = -x² - 4', isCorrect: false },
-      { id: 'q1-opt-c', label: 'y = x² + 4', isCorrect: false },
-      { id: 'q1-opt-d', label: 'y = -x² + 4', isCorrect: false },
+      { id: 'q1-opt-a', label: 'y = x² - 4', latex: 'y = x^2 - 4', isCorrect: true },
+      { id: 'q1-opt-b', label: 'y = -x² - 4', latex: 'y = -x^2 - 4', isCorrect: false },
+      { id: 'q1-opt-c', label: 'y = x² + 4', latex: 'y = x^2 + 4', isCorrect: false },
+      { id: 'q1-opt-d', label: 'y = -x² + 4', latex: 'y = -x^2 + 4', isCorrect: false },
     ],
     hints: [
-      'Step 1: Check the curve orientation. Does it open upwards (U-shape) or downwards (n-shape)? Upwards means a > 0.',
-      'Step 2: Check where the curve crosses the y-axis (y-intercept at x = 0). Here it crosses at (0, -4).',
-      'Step 3: Check the roots. At y = 0, x² - 4 = 0 gives x = ±2.',
+      'Step 1: Check the curve orientation. Does it open upwards (U-shape) or downwards (n-shape)? Upwards means $a > 0$.',
+      'Step 2: Check where the curve crosses the y-axis (y-intercept at $x = 0$). Here it crosses at $(0, -4)$.',
+      'Step 3: Check the roots. At $y = 0$, $x^2 - 4 = 0$ gives $x = \\pm 2$.',
     ],
-    explanation: 'Correct! The graph is U-shaped so a = +1 (positive). It crosses the y-axis at (0, -4), giving c = -4. The roots are x = -2 and x = 2.',
+    explanation: 'Correct! The graph is U-shaped so $a = +1$ (positive). It crosses the y-axis at $(0, -4)$, giving $c = -4$. The roots are $x = -2$ and $x = 2$, satisfying $y = x^2 - 4$.',
   },
   {
     id: 'quad-2',
@@ -43,7 +44,8 @@ export const INITIAL_QUESTIONS: Question[] = [
     number: 2,
     title: 'Warm-up 2: Inverted Parabola',
     prompt: 'Look at the inverted parabola below. Which equation matches this curve?',
-    equationDisplay: 'Find the quadratic equation',
+    equationDisplay: 'y = -x² + 1',
+    equationLatex: 'y = -x^2 + 1',
     graphConfig: {
       type: 'quadratic',
       quadA: -1,
@@ -58,17 +60,17 @@ export const INITIAL_QUESTIONS: Question[] = [
       ],
     },
     options: [
-      { id: 'q2-opt-a', label: 'y = -x² + 1', isCorrect: true },
-      { id: 'q2-opt-b', label: 'y = x² + 1', isCorrect: false },
-      { id: 'q2-opt-c', label: 'y = -x² - 1', isCorrect: false },
-      { id: 'q2-opt-d', label: 'y = x² - 1', isCorrect: false },
+      { id: 'q2-opt-a', label: 'y = -x² + 1', latex: 'y = -x^2 + 1', isCorrect: true },
+      { id: 'q2-opt-b', label: 'y = x² + 1', latex: 'y = x^2 + 1', isCorrect: false },
+      { id: 'q2-opt-c', label: 'y = -x² - 1', latex: 'y = -x^2 - 1', isCorrect: false },
+      { id: 'q2-opt-d', label: 'y = x² - 1', latex: 'y = x^2 - 1', isCorrect: false },
     ],
     hints: [
-      'Step 1: Notice the curve is an inverted n-shape with a highest point (maximum). This means the coefficient of x² must be negative (a < 0).',
-      'Step 2: Look at the highest point (vertex) on the y-axis. It is located at (0, 1), so c = +1.',
-      'Step 3: When x = 0, y = -(0)² + 1 = 1. And when x = 1, y = -(1)² + 1 = 0.',
+      'Step 1: Notice the curve is an inverted n-shape with a highest point (maximum). This means the coefficient of $x^2$ must be negative ($a < 0$).',
+      'Step 2: Look at the highest point (vertex) on the y-axis. It is located at $(0, 1)$, so $c = +1$.',
+      'Step 3: When $x = 0$, $y = -(0)^2 + 1 = 1$. And when $x = 1$, $y = -(1)^2 + 1 = 0$.',
     ],
-    explanation: 'Well done! An n-shaped parabola has a negative x² term (-x²). Its maximum turning point is at (0, 1), so y = -x² + 1.',
+    explanation: 'Well done! An n-shaped parabola has a negative $x^2$ term ($-x^2$). Its maximum turning point is at $(0, 1)$, confirming $y = -x^2 + 1$.',
   },
   {
     id: 'quad-3',
@@ -76,7 +78,8 @@ export const INITIAL_QUESTIONS: Question[] = [
     number: 3,
     title: 'Warm-up 3: Parabola Crossing Origin',
     prompt: 'This parabola passes through the origin (0, 0) and (2, 0). Which equation represents it?',
-    equationDisplay: 'Find the quadratic equation',
+    equationDisplay: 'y = x² - 2x',
+    equationLatex: 'y = x^2 - 2x',
     graphConfig: {
       type: 'quadratic',
       quadA: 1,
@@ -91,30 +94,33 @@ export const INITIAL_QUESTIONS: Question[] = [
       ],
     },
     options: [
-      { id: 'q3-opt-a', label: 'y = x² - 2x', isCorrect: true },
-      { id: 'q3-opt-b', label: 'y = x² + 2x', isCorrect: false },
-      { id: 'q3-opt-c', label: 'y = -x² + 2x', isCorrect: false },
-      { id: 'q3-opt-d', label: 'y = x² - 4', isCorrect: false },
+      { id: 'q3-opt-a', label: 'y = x² - 2x', latex: 'y = x^2 - 2x', isCorrect: true },
+      { id: 'q3-opt-b', label: 'y = x² + 2x', latex: 'y = x^2 + 2x', isCorrect: false },
+      { id: 'q3-opt-c', label: 'y = -x² + 2x', latex: 'y = -x^2 + 2x', isCorrect: false },
+      { id: 'q3-opt-d', label: 'y = x² - 4', latex: 'y = x^2 - 4', isCorrect: false },
     ],
     hints: [
-      'Step 1: The curve opens upwards (U-shape), so the coefficient of x² is positive (+x²).',
-      'Step 2: The y-intercept is (0, 0), which means there is no constant term (c = 0).',
-      'Step 3: Test x = 2: 2² - 2(2) = 4 - 4 = 0. The minimum vertex is at (1, -1): 1² - 2(1) = -1.',
+      'Step 1: The curve opens upwards (U-shape), so the coefficient of $x^2$ is positive ($+x^2$).',
+      'Step 2: The y-intercept is $(0, 0)$, which means there is no constant term ($c = 0$).',
+      'Step 3: Test $x = 2$: $2^2 - 2(2) = 4 - 4 = 0$. The minimum vertex is at $(1, -1)$: $1^2 - 2(1) = -1$.',
     ],
-    explanation: 'Awesome! y = x(x - 2) = x² - 2x has roots at x = 0 and x = 2, with vertex at (1, -1).',
+    explanation: 'Awesome! $y = x(x - 2) = x^2 - 2x$ has roots at $x = 0$ and $x = 2$, with vertex at $(1, -1)$.',
   },
   {
     id: 'quad-4',
     section: 'quadratic',
     number: 4,
     title: 'Warm-up 4: Select the Graph for y = x² + 2',
-    prompt: 'Which graph correctly shows the quadratic equation y = x² + 2?',
+    prompt: 'Which graph correctly shows the quadratic equation $y = x^2 + 2$?',
     equationDisplay: 'y = x² + 2',
+    equationLatex: 'y = x^2 + 2',
     options: [
       {
         id: 'q4-opt-a',
         label: 'Option A',
+        latex: 'y = x^2 + 2',
         subLabel: 'U-shape, vertex at (0, 2)',
+        subLabelLatex: '\\text{U-shape, vertex at } (0, 2)',
         isCorrect: true,
         graphConfig: {
           type: 'quadratic',
@@ -129,7 +135,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q4-opt-b',
         label: 'Option B',
+        latex: 'y = x^2 - 2',
         subLabel: 'U-shape, vertex at (0, -2)',
+        subLabelLatex: '\\text{U-shape, vertex at } (0, -2)',
         isCorrect: false,
         graphConfig: {
           type: 'quadratic',
@@ -144,7 +152,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q4-opt-c',
         label: 'Option C',
+        latex: 'y = -x^2 + 2',
         subLabel: 'n-shape, vertex at (0, 2)',
+        subLabelLatex: '\\text{n-shape, vertex at } (0, 2)',
         isCorrect: false,
         graphConfig: {
           type: 'quadratic',
@@ -159,7 +169,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q4-opt-d',
         label: 'Option D',
+        latex: 'y = -x^2 - 2',
         subLabel: 'n-shape, vertex at (0, -2)',
+        subLabelLatex: '\\text{n-shape, vertex at } (0, -2)',
         isCorrect: false,
         graphConfig: {
           type: 'quadratic',
@@ -173,24 +185,27 @@ export const INITIAL_QUESTIONS: Question[] = [
       },
     ],
     hints: [
-      'Step 1: Look at the sign of x². It is positive (+1), so the graph must be a U-shape (opening upwards). This eliminates options with an n-shape.',
-      'Step 2: Plug in x = 0 to find the vertex: y = 0² + 2 = 2.',
-      'Step 3: The minimum point must sit at (0, 2) on the positive y-axis.',
+      'Step 1: Look at the sign of $x^2$. It is positive ($+1$), so the graph must be a U-shape (opening upwards).',
+      'Step 2: Plug in $x = 0$ to find the vertex: $y = 0^2 + 2 = 2$.',
+      'Step 3: The minimum point must sit at $(0, 2)$ on the positive y-axis.',
     ],
-    explanation: 'Correct! y = x² + 2 is an upward U-shaped curve whose lowest point is at (0, 2), never crossing the x-axis.',
+    explanation: 'Correct! $y = x^2 + 2$ is an upward U-shaped curve whose lowest point is at $(0, 2)$, never crossing the x-axis.',
   },
   {
     id: 'quad-5',
     section: 'quadratic',
     number: 5,
     title: 'Warm-up 5: Select the Graph for y = -x² + 3',
-    prompt: 'Which graph correctly shows the quadratic equation y = -x² + 3?',
+    prompt: 'Which graph correctly shows the quadratic equation $y = -x^2 + 3$?',
     equationDisplay: 'y = -x² + 3',
+    equationLatex: 'y = -x^2 + 3',
     options: [
       {
         id: 'q5-opt-a',
         label: 'Option A',
+        latex: 'y = -x^2 + 3',
         subLabel: 'n-shape, peak at (0, 3)',
+        subLabelLatex: '\\text{n-shape, peak at } (0, 3)',
         isCorrect: true,
         graphConfig: {
           type: 'quadratic',
@@ -205,7 +220,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q5-opt-b',
         label: 'Option B',
+        latex: 'y = x^2 + 3',
         subLabel: 'U-shape, min at (0, 3)',
+        subLabelLatex: '\\text{U-shape, min at } (0, 3)',
         isCorrect: false,
         graphConfig: {
           type: 'quadratic',
@@ -220,7 +237,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q5-opt-c',
         label: 'Option C',
+        latex: 'y = -x^2 - 3',
         subLabel: 'n-shape, peak at (0, -3)',
+        subLabelLatex: '\\text{n-shape, peak at } (0, -3)',
         isCorrect: false,
         graphConfig: {
           type: 'quadratic',
@@ -235,7 +254,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q5-opt-d',
         label: 'Option D',
+        latex: 'y = x^2 - 3',
         subLabel: 'U-shape, min at (0, -3)',
+        subLabelLatex: '\\text{U-shape, min at } (0, -3)',
         isCorrect: false,
         graphConfig: {
           type: 'quadratic',
@@ -249,11 +270,11 @@ export const INITIAL_QUESTIONS: Question[] = [
       },
     ],
     hints: [
-      'Step 1: The negative sign infront of x² (-x²) means the parabola is inverted (an n-shape with a maximum peak).',
-      'Step 2: When x = 0, y = -(0)² + 3 = 3. The peak is at (0, 3).',
-      'Step 3: Only one option is an n-shape with its peak at (0, 3).',
+      'Step 1: The negative sign in front of $x^2$ ($-x^2$) means the parabola is inverted (an n-shape with a maximum peak).',
+      'Step 2: When $x = 0$, $y = -(0)^2 + 3 = 3$. The peak is at $(0, 3)$.',
+      'Step 3: Only one option is an n-shape with its peak at $(0, 3)$.',
     ],
-    explanation: 'Great job! The negative sign flips the curve into an n-shape, and +3 lifts the vertex to (0, 3).',
+    explanation: 'Great job! The negative sign flips the curve into an n-shape, and $+3$ lifts the vertex to $(0, 3)$.',
   },
 
   // ==========================================
@@ -268,6 +289,7 @@ export const INITIAL_QUESTIONS: Question[] = [
     title: 'Assessment 1: Identify Hyperbola Equation',
     prompt: 'Look at the hyperbola shown below. Which equation matches this graph?',
     equationDisplay: 'Find the hyperbola equation',
+    equationLatex: 'y = \\frac{a}{x} + b',
     graphConfig: {
       type: 'hyperbola',
       a: 3,
@@ -282,17 +304,17 @@ export const INITIAL_QUESTIONS: Question[] = [
       ],
     },
     options: [
-      { id: 'q6-opt-a', label: 'y = 3/x + 1', isCorrect: true },
-      { id: 'q6-opt-b', label: 'y = -3/x + 1', isCorrect: false },
-      { id: 'q6-opt-c', label: 'y = 3/x - 1', isCorrect: false },
-      { id: 'q6-opt-d', label: 'y = 1/x + 3', isCorrect: false },
+      { id: 'q6-opt-a', label: 'y = 3/x + 1', latex: 'y = \\frac{3}{x} + 1', isCorrect: true },
+      { id: 'q6-opt-b', label: 'y = -3/x + 1', latex: 'y = -\\frac{3}{x} + 1', isCorrect: false },
+      { id: 'q6-opt-c', label: 'y = 3/x - 1', latex: 'y = \\frac{3}{x} - 1', isCorrect: false },
+      { id: 'q6-opt-d', label: 'y = 1/x + 3', latex: 'y = \\frac{1}{x} + 3', isCorrect: false },
     ],
     hints: [
-      'Step 1: Check the horizontal asymptote (the blue dashed line). It lies at y = 1, so b = +1.',
-      'Step 2: Look at which quadrants relative to the asymptotes the curve sits in. Top-right and bottom-left means a > 0 (positive).',
-      'Step 3: Test a point! When x = 1, y = 3/(1) + 1 = 4, which matches the marked point (1, 4).',
+      'Step 1: Check the horizontal asymptote (the blue dashed line). It lies at $y = 1$, so $b = +1$.',
+      'Step 2: Look at which quadrants relative to the asymptotes the curve sits in. Top-right and bottom-left means $a > 0$ (positive).',
+      'Step 3: Test a point! When $x = 1$, $y = \\frac{3}{1} + 1 = 4$, which matches the marked point $(1, 4)$.',
     ],
-    explanation: 'Spot on! The horizontal asymptote is at y = 1 (so b = 1), and the branches lie in Quadrants 1 & 3 with test point (1, 4), confirming a = 3.',
+    explanation: 'Spot on! The horizontal asymptote is at $y = 1$ (so $b = 1$), and the branches lie in Quadrants 1 & 3 with test point $(1, 4)$, confirming $y = \\frac{3}{x} + 1$.',
   },
   {
     id: 'hyp-7',
@@ -301,6 +323,7 @@ export const INITIAL_QUESTIONS: Question[] = [
     title: 'Assessment 2: Negative Hyperbola with Shift',
     prompt: 'Study the hyperbola below with branches in Quadrants 2 & 4. Which equation is correct?',
     equationDisplay: 'Find the hyperbola equation',
+    equationLatex: 'y = \\frac{a}{x} + b',
     graphConfig: {
       type: 'hyperbola',
       a: -4,
@@ -315,17 +338,17 @@ export const INITIAL_QUESTIONS: Question[] = [
       ],
     },
     options: [
-      { id: 'q7-opt-a', label: 'y = -4/x + 2', isCorrect: true },
-      { id: 'q7-opt-b', label: 'y = 4/x + 2', isCorrect: false },
-      { id: 'q7-opt-c', label: 'y = -4/x - 2', isCorrect: false },
-      { id: 'q7-opt-d', label: 'y = -2/x + 4', isCorrect: false },
+      { id: 'q7-opt-a', label: 'y = -4/x + 2', latex: 'y = -\\frac{4}{x} + 2', isCorrect: true },
+      { id: 'q7-opt-b', label: 'y = 4/x + 2', latex: 'y = \\frac{4}{x} + 2', isCorrect: false },
+      { id: 'q7-opt-c', label: 'y = -4/x - 2', latex: 'y = -\\frac{4}{x} - 2', isCorrect: false },
+      { id: 'q7-opt-d', label: 'y = -2/x + 4', latex: 'y = -\\frac{2}{x} + 4', isCorrect: false },
     ],
     hints: [
-      'Step 1: Find the horizontal asymptote. The blue dashed line is at y = 2, so b = +2.',
-      'Step 2: The branches are in Quadrants 2 (top-left) and 4 (bottom-right), which means a must be negative (a < 0).',
-      'Step 3: Test a marked coordinate: when x = 2, y = -4/2 + 2 = -2 + 2 = 0. Matches (2, 0)!',
+      'Step 1: Find the horizontal asymptote. The blue dashed line is at $y = 2$, so $b = +2$.',
+      'Step 2: The branches are in Quadrants 2 (top-left) and 4 (bottom-right), which means $a$ must be negative ($a < 0$).',
+      'Step 3: Test a marked coordinate: when $x = 2$, $y = -\\frac{4}{2} + 2 = -2 + 2 = 0$. Matches $(2, 0)$!',
     ],
-    explanation: 'Excellent! The horizontal asymptote is y = 2 (b = 2), and negative a = -4 places the branches in Quadrants 2 and 4.',
+    explanation: 'Excellent! The horizontal asymptote is $y = 2$ ($b = 2$), and negative $a = -4$ places the branches in Quadrants 2 and 4: $y = -\\frac{4}{x} + 2$.',
   },
   {
     id: 'hyp-8',
@@ -334,6 +357,7 @@ export const INITIAL_QUESTIONS: Question[] = [
     title: 'Assessment 3: Downward Shifted Hyperbola',
     prompt: 'Look at this hyperbola. What is the correct equation?',
     equationDisplay: 'Find the hyperbola equation',
+    equationLatex: 'y = \\frac{a}{x} + b',
     graphConfig: {
       type: 'hyperbola',
       a: 2,
@@ -348,17 +372,17 @@ export const INITIAL_QUESTIONS: Question[] = [
       ],
     },
     options: [
-      { id: 'q8-opt-a', label: 'y = 2/x - 3', isCorrect: true },
-      { id: 'q8-opt-b', label: 'y = 2/x + 3', isCorrect: false },
-      { id: 'q8-opt-c', label: 'y = -2/x - 3', isCorrect: false },
-      { id: 'q8-opt-d', label: 'y = 3/x - 2', isCorrect: false },
+      { id: 'q8-opt-a', label: 'y = 2/x - 3', latex: 'y = \\frac{2}{x} - 3', isCorrect: true },
+      { id: 'q8-opt-b', label: 'y = 2/x + 3', latex: 'y = \\frac{2}{x} + 3', isCorrect: false },
+      { id: 'q8-opt-c', label: 'y = -2/x - 3', latex: 'y = -\\frac{2}{x} - 3', isCorrect: false },
+      { id: 'q8-opt-d', label: 'y = 3/x - 2', latex: 'y = \\frac{3}{x} - 2', isCorrect: false },
     ],
     hints: [
-      'Step 1: Look at the horizontal dashed line. It is at y = -3, meaning b = -3.',
-      'Step 2: The branches are in Quadrants 1 and 3 (top-right & bottom-left), so a is positive (+2).',
-      'Step 3: Test point (1, -1): y = 2/(1) - 3 = 2 - 3 = -1. Perfect match!',
+      'Step 1: Look at the horizontal dashed line. It is at $y = -3$, meaning $b = -3$.',
+      'Step 2: The branches are in Quadrants 1 and 3 (top-right & bottom-left), so $a$ is positive ($+2$).',
+      'Step 3: Test point $(1, -1)$: $y = \\frac{2}{1} - 3 = 2 - 3 = -1$. Perfect match!',
     ],
-    explanation: 'Correct! The horizontal asymptote is shifted down to y = -3 (b = -3), and a = +2 keeps the branches in Quadrants 1 & 3.',
+    explanation: 'Correct! The horizontal asymptote is shifted down to $y = -3$ ($b = -3$), and $a = +2$ keeps the branches in Quadrants 1 & 3: $y = \\frac{2}{x} - 3$.',
   },
 
   // TYPE 2: Select Correct Graph for Given Equation (Q9, Q10, Q11)
@@ -367,13 +391,16 @@ export const INITIAL_QUESTIONS: Question[] = [
     section: 'hyperbola',
     number: 9,
     title: 'Assessment 4: Select the Graph for y = 4/x + 1',
-    prompt: 'Which graph correctly illustrates the equation y = 4/x + 1?',
+    prompt: 'Which graph correctly illustrates the equation $y = \\frac{4}{x} + 1$?',
     equationDisplay: 'y = 4/x + 1',
+    equationLatex: 'y = \\frac{4}{x} + 1',
     options: [
       {
         id: 'q9-opt-a',
         label: 'Graph A',
+        latex: 'y = \\frac{4}{x} + 1',
         subLabel: 'Q1 & Q3, asymptote y = 1',
+        subLabelLatex: '\\text{Q1 \\& Q3, asymptote } y = 1',
         isCorrect: true,
         graphConfig: {
           type: 'hyperbola',
@@ -388,7 +415,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q9-opt-b',
         label: 'Graph B',
+        latex: 'y = -\\frac{4}{x} + 1',
         subLabel: 'Q2 & Q4, asymptote y = 1',
+        subLabelLatex: '\\text{Q2 \\& Q4, asymptote } y = 1',
         isCorrect: false,
         graphConfig: {
           type: 'hyperbola',
@@ -403,7 +432,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q9-opt-c',
         label: 'Graph C',
+        latex: 'y = \\frac{4}{x} - 1',
         subLabel: 'Q1 & Q3, asymptote y = -1',
+        subLabelLatex: '\\text{Q1 \\& Q3, asymptote } y = -1',
         isCorrect: false,
         graphConfig: {
           type: 'hyperbola',
@@ -418,7 +449,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q9-opt-d',
         label: 'Graph D',
+        latex: 'y = -\\frac{4}{x} - 1',
         subLabel: 'Q2 & Q4, asymptote y = -1',
+        subLabelLatex: '\\text{Q2 \\& Q4, asymptote } y = -1',
         isCorrect: false,
         graphConfig: {
           type: 'hyperbola',
@@ -432,24 +465,27 @@ export const INITIAL_QUESTIONS: Question[] = [
       },
     ],
     hints: [
-      'Step 1: Check b = +1. The horizontal asymptote must be above the x-axis at y = 1.',
-      'Step 2: Check a = +4 (positive). The branches must be in Quadrants 1 (top-right) and 3 (bottom-left).',
-      'Step 3: Combine both: asymptote at y = 1 AND branches in Quadrants 1 & 3.',
+      'Step 1: Check $b = +1$. The horizontal asymptote must be above the x-axis at $y = 1$.',
+      'Step 2: Check $a = +4$ (positive). The branches must be in Quadrants 1 (top-right) and 3 (bottom-left).',
+      'Step 3: Combine both: asymptote at $y = 1$ AND branches in Quadrants 1 & 3.',
     ],
-    explanation: 'Well done! a = 4 is positive (Quadrants 1 & 3), and b = 1 puts the horizontal asymptote at y = 1.',
+    explanation: 'Well done! $a = 4$ is positive (Quadrants 1 & 3), and $b = 1$ puts the horizontal asymptote at $y = 1$.',
   },
   {
     id: 'hyp-10',
     section: 'hyperbola',
     number: 10,
     title: 'Assessment 5: Select the Graph for y = -2/x - 2',
-    prompt: 'Which graph correctly illustrates the equation y = -2/x - 2?',
+    prompt: 'Which graph correctly illustrates the equation $y = -\\frac{2}{x} - 2$?',
     equationDisplay: 'y = -2/x - 2',
+    equationLatex: 'y = -\\frac{2}{x} - 2',
     options: [
       {
         id: 'q10-opt-a',
         label: 'Graph A',
+        latex: 'y = -\\frac{2}{x} - 2',
         subLabel: 'Q2 & Q4, asymptote y = -2',
+        subLabelLatex: '\\text{Q2 \\& Q4, asymptote } y = -2',
         isCorrect: true,
         graphConfig: {
           type: 'hyperbola',
@@ -464,7 +500,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q10-opt-b',
         label: 'Graph B',
+        latex: 'y = \\frac{2}{x} - 2',
         subLabel: 'Q1 & Q3, asymptote y = -2',
+        subLabelLatex: '\\text{Q1 \\& Q3, asymptote } y = -2',
         isCorrect: false,
         graphConfig: {
           type: 'hyperbola',
@@ -479,7 +517,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q10-opt-c',
         label: 'Graph C',
+        latex: 'y = -\\frac{2}{x} + 2',
         subLabel: 'Q2 & Q4, asymptote y = +2',
+        subLabelLatex: '\\text{Q2 \\& Q4, asymptote } y = +2',
         isCorrect: false,
         graphConfig: {
           type: 'hyperbola',
@@ -494,7 +534,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q10-opt-d',
         label: 'Graph D',
+        latex: 'y = \\frac{2}{x} + 2',
         subLabel: 'Q1 & Q3, asymptote y = +2',
+        subLabelLatex: '\\text{Q1 \\& Q3, asymptote } y = +2',
         isCorrect: false,
         graphConfig: {
           type: 'hyperbola',
@@ -508,24 +550,27 @@ export const INITIAL_QUESTIONS: Question[] = [
       },
     ],
     hints: [
-      'Step 1: Check b = -2. The horizontal asymptote must be below the x-axis at y = -2.',
-      'Step 2: The numerator is negative (a = -2), so the branches are in Quadrants 2 & 4.',
-      'Step 3: Only Graph A has both an asymptote at y = -2 AND branches in Quadrants 2 & 4.',
+      'Step 1: Check $b = -2$. The horizontal asymptote must be below the x-axis at $y = -2$.',
+      'Step 2: The numerator is negative ($a = -2$), so the branches are in Quadrants 2 & 4.',
+      'Step 3: Only Graph A has both an asymptote at $y = -2$ AND branches in Quadrants 2 & 4.',
     ],
-    explanation: 'Accurate! Negative a (-2) places the branches in Quadrants 2 & 4, and b = -2 sets the horizontal asymptote at y = -2.',
+    explanation: 'Accurate! Negative $a = -2$ places the branches in Quadrants 2 & 4, and $b = -2$ sets the horizontal asymptote at $y = -2$.',
   },
   {
     id: 'hyp-11',
     section: 'hyperbola',
     number: 11,
     title: 'Assessment 6: Standard Hyperbola y = 5/x',
-    prompt: 'Which graph correctly illustrates the standard hyperbola y = 5/x (where b = 0)?',
+    prompt: 'Which graph correctly illustrates the standard hyperbola $y = \\frac{5}{x}$ (where $b = 0$)?',
     equationDisplay: 'y = 5/x',
+    equationLatex: 'y = \\frac{5}{x}',
     options: [
       {
         id: 'q11-opt-a',
         label: 'Graph A',
+        latex: 'y = \\frac{5}{x}',
         subLabel: 'Q1 & Q3, asymptote on x-axis y = 0',
+        subLabelLatex: '\\text{Q1 \\& Q3, asymptote } y = 0',
         isCorrect: true,
         graphConfig: {
           type: 'hyperbola',
@@ -540,7 +585,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q11-opt-b',
         label: 'Graph B',
+        latex: 'y = -\\frac{5}{x}',
         subLabel: 'Q2 & Q4, asymptote on x-axis y = 0',
+        subLabelLatex: '\\text{Q2 \\& Q4, asymptote } y = 0',
         isCorrect: false,
         graphConfig: {
           type: 'hyperbola',
@@ -555,7 +602,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q11-opt-c',
         label: 'Graph C',
+        latex: 'y = \\frac{5}{x} + 3',
         subLabel: 'Q1 & Q3, asymptote shifted to y = 3',
+        subLabelLatex: '\\text{Q1 \\& Q3, asymptote } y = 3',
         isCorrect: false,
         graphConfig: {
           type: 'hyperbola',
@@ -570,7 +619,9 @@ export const INITIAL_QUESTIONS: Question[] = [
       {
         id: 'q11-opt-d',
         label: 'Graph D',
+        latex: 'y = -\\frac{5}{x} - 3',
         subLabel: 'Q2 & Q4, asymptote shifted to y = -3',
+        subLabelLatex: '\\text{Q2 \\& Q4, asymptote } y = -3',
         isCorrect: false,
         graphConfig: {
           type: 'hyperbola',
@@ -584,11 +635,11 @@ export const INITIAL_QUESTIONS: Question[] = [
       },
     ],
     hints: [
-      'Step 1: Notice there is no constant added to 5/x, so b = 0.',
-      'Step 2: An asymptote of y = 0 means the horizontal asymptote is right on the x-axis.',
-      'Step 3: a = +5 is positive, so the branches lie in Quadrants 1 and 3.',
+      'Step 1: Notice there is no constant added to $\\frac{5}{x}$, so $b = 0$.',
+      'Step 2: An asymptote of $y = 0$ means the horizontal asymptote is right on the x-axis.',
+      'Step 3: $a = +5$ is positive, so the branches lie in Quadrants 1 and 3.',
     ],
-    explanation: 'Spot on! With b = 0, the horizontal asymptote is y = 0 (the x-axis), and positive a = 5 places the curve in Quadrants 1 & 3.',
+    explanation: 'Spot on! With $b = 0$, the horizontal asymptote is $y = 0$ (the x-axis), and positive $a = 5$ places the curve in Quadrants 1 & 3: $y = \\frac{5}{x}$.',
   },
 
   // TYPE 3: Identify Equation of Horizontal Asymptote (Q12, Q13)
@@ -597,40 +648,42 @@ export const INITIAL_QUESTIONS: Question[] = [
     section: 'hyperbola',
     number: 12,
     title: 'Assessment 7: Horizontal Asymptote of y = 6/x - 4',
-    prompt: 'For the hyperbola y = 6/x - 4, what is the equation of the horizontal asymptote?',
+    prompt: 'For the hyperbola $y = \\frac{6}{x} - 4$, what is the equation of the horizontal asymptote?',
     equationDisplay: 'y = 6/x - 4',
+    equationLatex: 'y = \\frac{6}{x} - 4',
     options: [
-      { id: 'q12-opt-a', label: 'y = -4', isCorrect: true },
-      { id: 'q12-opt-b', label: 'y = 4', isCorrect: false },
-      { id: 'q12-opt-c', label: 'x = -4', isCorrect: false },
-      { id: 'q12-opt-d', label: 'x = 0', isCorrect: false },
+      { id: 'q12-opt-a', label: 'y = -4', latex: 'y = -4', isCorrect: true },
+      { id: 'q12-opt-b', label: 'y = 4', latex: 'y = 4', isCorrect: false },
+      { id: 'q12-opt-c', label: 'x = -4', latex: 'x = -4', isCorrect: false },
+      { id: 'q12-opt-d', label: 'x = 0', latex: 'x = 0', isCorrect: false },
     ],
     hints: [
-      'Step 1: In the form y = a/x + b, what happens as x becomes very large (like 10,000)? 6/x becomes practically 0.',
-      'Step 2: So y approaches 0 - 4 = -4.',
-      'Step 3: Remember: horizontal lines always have equations starting with "y =", while vertical lines start with "x =".',
+      'Step 1: In the form $y = \\frac{a}{x} + b$, what happens as $x$ becomes very large? $\\frac{6}{x}$ becomes practically $0$.',
+      'Step 2: So $y$ approaches $0 - 4 = -4$.',
+      'Step 3: Remember: horizontal lines always have equations starting with $y =$, while vertical lines start with $x =$.',
     ],
-    explanation: 'Correct! In y = a/x + b, the horizontal asymptote is always y = b. Here b = -4, so the horizontal asymptote is y = -4. (x = 0 is the vertical asymptote!)',
+    explanation: 'Correct! In $y = \\frac{a}{x} + b$, the horizontal asymptote is always $y = b$. Here $b = -4$, so the horizontal asymptote is $y = -4$. Note: $x = 0$ is the vertical asymptote!',
   },
   {
     id: 'hyp-13',
     section: 'hyperbola',
     number: 13,
     title: 'Assessment 8: Horizontal Asymptote of y = -5/x + 3',
-    prompt: 'What is the equation of the horizontal asymptote for y = -5/x + 3?',
+    prompt: 'What is the equation of the horizontal asymptote for $y = -\\frac{5}{x} + 3$?',
     equationDisplay: 'y = -5/x + 3',
+    equationLatex: 'y = -\\frac{5}{x} + 3',
     options: [
-      { id: 'q13-opt-a', label: 'y = 3', isCorrect: true },
-      { id: 'q13-opt-b', label: 'y = -3', isCorrect: false },
-      { id: 'q13-opt-c', label: 'y = -5', isCorrect: false },
-      { id: 'q13-opt-d', label: 'x = 3', isCorrect: false },
+      { id: 'q13-opt-a', label: 'y = 3', latex: 'y = 3', isCorrect: true },
+      { id: 'q13-opt-b', label: 'y = -3', latex: 'y = -3', isCorrect: false },
+      { id: 'q13-opt-c', label: 'y = -5', latex: 'y = -5', isCorrect: false },
+      { id: 'q13-opt-d', label: 'x = 3', latex: 'x = 3', isCorrect: false },
     ],
     hints: [
-      'Step 1: Identify the constant term b in y = a/x + b.',
-      'Step 2: The constant term added is +3.',
-      'Step 3: Therefore, as x approaches infinity, -5/x approaches 0 and y approaches 3.',
+      'Step 1: Identify the constant term $b$ in $y = \\frac{a}{x} + b$.',
+      'Step 2: The constant term added is $+3$.',
+      'Step 3: Therefore, as $x$ approaches infinity, $-\\frac{5}{x} \\to 0$ and $y \\to 3$.',
     ],
-    explanation: 'Great work! The constant is +3, so the curve levels off along the horizontal line y = 3.',
+    explanation: 'Great work! The constant is $+3$, so the curve levels off along the horizontal line $y = 3$.',
   },
 
   // TYPE 4: Decide Quadrants from Sign of a (Q14, Q15)
@@ -639,40 +692,42 @@ export const INITIAL_QUESTIONS: Question[] = [
     section: 'hyperbola',
     number: 14,
     title: 'Assessment 9: Which Quadrants for y = -3/x + 2?',
-    prompt: 'In the hyperbola y = -3/x + 2, which quadrants (relative to the asymptotes) do the two branches occupy?',
+    prompt: 'In the hyperbola $y = -\\frac{3}{x} + 2$, which quadrants (relative to the asymptotes) do the two branches occupy?',
     equationDisplay: 'y = -3/x + 2',
+    equationLatex: 'y = -\\frac{3}{x} + 2',
     options: [
-      { id: 'q14-opt-a', label: 'Quadrants 2 and 4 (Top-Left & Bottom-Right)', isCorrect: true },
-      { id: 'q14-opt-b', label: 'Quadrants 1 and 3 (Top-Right & Bottom-Left)', isCorrect: false },
-      { id: 'q14-opt-c', label: 'Quadrants 1 and 2 (Top branches only)', isCorrect: false },
-      { id: 'q14-opt-d', label: 'Quadrants 3 and 4 (Bottom branches only)', isCorrect: false },
+      { id: 'q14-opt-a', label: 'Quadrants 2 and 4 (Top-Left & Bottom-Right)', latex: '\\text{Quadrants 2 and 4 (Top-Left \\& Bottom-Right)}', isCorrect: true },
+      { id: 'q14-opt-b', label: 'Quadrants 1 and 3 (Top-Right & Bottom-Left)', latex: '\\text{Quadrants 1 and 3 (Top-Right \\& Bottom-Left)}', isCorrect: false },
+      { id: 'q14-opt-c', label: 'Quadrants 1 and 2 (Top branches only)', latex: '\\text{Quadrants 1 and 2 (Top branches only)}', isCorrect: false },
+      { id: 'q14-opt-d', label: 'Quadrants 3 and 4 (Bottom branches only)', latex: '\\text{Quadrants 3 and 4 (Bottom branches only)}', isCorrect: false },
     ],
     hints: [
-      'Step 1: Check the numerator a. Here a = -3, which is negative (a < 0).',
-      'Step 2: A positive numerator (a > 0) produces branches in Q1 and Q3.',
-      'Step 3: A negative numerator (a < 0) flips the branches into Q2 (top-left) and Q4 (bottom-right).',
+      'Step 1: Check the numerator $a$. Here $a = -3$, which is negative ($a < 0$).',
+      'Step 2: A positive numerator ($a > 0$) produces branches in Q1 and Q3.',
+      'Step 3: A negative numerator ($a < 0$) flips the branches into Q2 (top-left) and Q4 (bottom-right).',
     ],
-    explanation: 'Exactly! Because a = -3 is negative, the branches are located in Quadrants 2 and 4 relative to its asymptotes.',
+    explanation: 'Exactly! Because $a = -3$ is negative, the branches are located in Quadrants 2 and 4 relative to its asymptotes.',
   },
   {
     id: 'hyp-15',
     section: 'hyperbola',
     number: 15,
     title: 'Assessment 10: Rule for Branches in Quadrants 1 & 3',
-    prompt: 'A student sketches a hyperbola y = a/x + b and sees branches in Quadrants 1 & 3 relative to the asymptotes. What must be true about the coefficient a?',
+    prompt: 'A student sketches a hyperbola $y = \\frac{a}{x} + b$ and sees branches in Quadrants 1 & 3 relative to the asymptotes. What must be true about the coefficient $a$?',
     equationDisplay: 'y = a/x + b with branches in Q1 & Q3',
+    equationLatex: 'y = \\frac{a}{x} + b \\implies \\text{Branches in Q1 \\& Q3}',
     options: [
-      { id: 'q15-opt-a', label: 'a must be positive (a > 0)', isCorrect: true },
-      { id: 'q15-opt-b', label: 'a must be negative (a < 0)', isCorrect: false },
-      { id: 'q15-opt-c', label: 'b must be positive (b > 0)', isCorrect: false },
-      { id: 'q15-opt-d', label: 'a must equal 0 (a = 0)', isCorrect: false },
+      { id: 'q15-opt-a', label: 'a must be positive (a > 0)', latex: 'a > 0 \\quad (a \\text{ is positive})', isCorrect: true },
+      { id: 'q15-opt-b', label: 'a must be negative (a < 0)', latex: 'a < 0 \\quad (a \\text{ is negative})', isCorrect: false },
+      { id: 'q15-opt-c', label: 'b must be positive (b > 0)', latex: 'b > 0 \\quad (b \\text{ is positive})', isCorrect: false },
+      { id: 'q15-opt-d', label: 'a must equal 0 (a = 0)', latex: 'a = 0 \\quad (a \\text{ is zero})', isCorrect: false },
     ],
     hints: [
-      'Step 1: Remember: the position of the quadrants depends only on the sign of a, not on b.',
-      'Step 2: Quadrant 1 has positive x and positive y. For y = a/x to be positive when x is positive, a must be positive!',
-      'Step 3: Therefore, a > 0 puts branches in Quadrants 1 and 3.',
+      'Step 1: Remember: the position of the quadrants depends only on the sign of $a$, not on $b$.',
+      'Step 2: Quadrant 1 has positive $x$ and positive $y$. For $y = \\frac{a}{x}$ to be positive when $x$ is positive, $a$ must be positive!',
+      'Step 3: Therefore, $a > 0$ puts branches in Quadrants 1 and 3.',
     ],
-    explanation: 'Outstanding! When a > 0, positive x produces positive y (Q1) and negative x produces negative y (Q3). So a must be positive!',
+    explanation: 'Outstanding! When $a > 0$, positive $x$ produces positive $y$ (Q1) and negative $x$ produces negative $y$ (Q3). So $a$ must be positive ($a > 0$).',
   },
 ];
 
